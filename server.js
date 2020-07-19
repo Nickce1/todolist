@@ -62,7 +62,7 @@ app.post('/addTask', (req, res) => {
 })
 
 app.get('/search/:keywords', (req, res) => {
-  const QUERY_SEARCH = `SELECT * FROM task WHERE t_name LIKE '%${req.params.keywords}%'`
+  const QUERY_SEARCH = `SELECT * FROM task WHERE t_name LIKE '%${req.params.keywords}%' AND t_etat = 0`
 
   connexion.query(QUERY_SEARCH, (error, results) => {
     if (error) {
