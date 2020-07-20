@@ -6,6 +6,10 @@ import { TasksList } from './Components/TasksList'
 function App() {
   const [tasks, setTasks] = useState([])
 
+  const setAllTasks = (data) => {
+    setTasks(data)
+  }
+
   const getAlltasks = () => {
     fetch('http://localhost:4000')
       .then((response) => response.json())
@@ -20,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation />
+      <Navigation setAllTasks={setAllTasks} />
       <TasksList tasks={tasks} />
     </div>
   )

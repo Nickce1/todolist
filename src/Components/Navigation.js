@@ -3,11 +3,12 @@ import { Navbar, Form, FormControl, Button } from 'react-bootstrap'
 
 import { AddModal } from './AddModal'
 
-export const Navigation = () => {
+export const Navigation = ({ setAllTasks }) => {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+
   return (
     <>
       <Navbar bg="light" variant="light">
@@ -22,7 +23,11 @@ export const Navigation = () => {
           <Button variant="outline-primary">Search</Button>
         </Form>
       </Navbar>
-      <AddModal handleClose={handleClose} show={show} />
+      <AddModal
+        handleClose={handleClose}
+        show={show}
+        setAllTasks={setAllTasks}
+      />
     </>
   )
 }
