@@ -15,7 +15,6 @@ export const TasksList = ({ tasks, updateTask }) => {
 
   const handleToggleComplete = (id) => {
     // Modify list
-    console.log('allTasks at the begining:')
     allTasks = allTasks.map((task) => {
       if (task.t_Id === id) {
         const taskChanged = {
