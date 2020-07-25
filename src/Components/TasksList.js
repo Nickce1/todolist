@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 
-export const TasksList = (props) => {
+export const TasksList = ({ tasks }) => {
   return (
     <Table responsive>
       <thead>
@@ -12,7 +12,7 @@ export const TasksList = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.tasks.map((task) => (
+        {tasks.map((task) => (
           <tr key={task.t_Id}>
             <td>{task.t_name}</td>
             <td>
