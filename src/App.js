@@ -10,7 +10,6 @@ function App() {
 
   const setAllTasks = (data) => {
     setTasks(data)
-    console.log(searchResult)
   }
 
   const searchResultHandler = (data) => {
@@ -23,6 +22,12 @@ function App() {
       .then((response) => {
         setTasks(response.data)
       })
+  }
+
+  const updateTask = (data) => {
+    window.location.href.includes('search')
+      ? setSearchResult(data)
+      : setTasks(data)
   }
 
   useEffect(() => {
@@ -38,11 +43,19 @@ function App() {
         />
 
         <Switch>
-          <Route exact path="/" component={() => <TasksList tasks={tasks} />} />
+          <Route
+            exact
+            path="/"
+            component={() => (
+              <TasksList tasks={tasks} updateTask={updateTask} />
+            )}
+          />
           <Route
             exact
             path="/search/:keyword"
-            component={() => <TasksList tasks={searchResult} />}
+            component={() => (
+              <TasksList tasks={searchResult} updateTask={updateTask} />
+            )}
           />
         </Switch>
       </Router>

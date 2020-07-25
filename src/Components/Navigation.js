@@ -15,12 +15,14 @@ export const Navigation = ({ setAllTasks, searchResultHandler }) => {
   const handleShow = () => setShow(true)
 
   const onSubmit = (data) => {
-    fetch(`http://localhost:4000/search/${data.keywordSearch}`)
-      .then((response) => response.json())
-      .then((response) => {
-        searchResultHandler(response.data)
-        history.push(`/search/${data.keywordSearch}`)
-      })
+    if (data.keywordSearch) {
+      fetch(`http://localhost:4000/search/${data.keywordSearch}`)
+        .then((response) => response.json())
+        .then((response) => {
+          searchResultHandler(response.data)
+          history.push(`/search/${data.keywordSearch}`)
+        })
+    } else history.push('/')
   }
 
   return (
