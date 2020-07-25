@@ -42,10 +42,6 @@ export const TasksList = ({ tasks, updateTask }) => {
     })
   }
 
-  // const handleLabelCSS = (event) => {
-  //   const taskLabel = event.target.
-  // }
-
   return (
     <Table responsive>
       <thead>
@@ -64,10 +60,6 @@ export const TasksList = ({ tasks, updateTask }) => {
                 type="checkbox"
                 defaultChecked={task.t_etat}
                 onClick={() => handleToggleComplete(task.t_Id)}
-                // onClick={(e, task) => {
-                //   handleToggleComplete(task.t_Id)
-                //   handleLabelCSS(e)
-                // }}
               />
             </td>
             <td>
