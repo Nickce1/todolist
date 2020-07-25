@@ -62,7 +62,7 @@ app.post('/addTask', (req, res) => {
 })
 
 app.get('/search/:keywords', (req, res) => {
-  const QUERY_SEARCH = `SELECT * FROM task WHERE t_name LIKE '%${req.params.keywords}%' AND t_etat = 0`
+  const QUERY_SEARCH = `SELECT * FROM task WHERE t_name LIKE '%${req.params.keywords}%'`
 
   connexion.query(QUERY_SEARCH, (error, results) => {
     if (error) {
@@ -73,6 +73,20 @@ app.get('/search/:keywords', (req, res) => {
         data: results,
       })
     }
+  })
+})
+
+app.post('/changestate', (req, res) => {
+  const QUERY_CHANGE_STATE = `UPDATE task SET t_etat = ${req.body.t_etat} WHERE t_Id = ${req.body.t_Id}`
+  connexion.query(QUERY_CHANGE_STATE, (error, result) => {
+    if (error) {
+      console.log('Update change state error: ')
+      console.log(error)
+    } else
+      res.send({
+        stateChange: 'Successful',
+        side: 'Database',
+      })
   })
 })
 
