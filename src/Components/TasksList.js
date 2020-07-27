@@ -24,7 +24,7 @@ export const TasksList = ({ tasks, updateTask }) => {
 
         // Send change to the database
         fetch(`http://localhost:4000/changestate`, {
-          method: 'POST',
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(taskChanged),
         })
@@ -39,6 +39,29 @@ export const TasksList = ({ tasks, updateTask }) => {
       }
       return task
     })
+  }
+
+  const handleDelete = (task_id) => {
+    if (window.confirm('Sure to delete this task ? ')) {
+      fetch('http://localhost:4000/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: task_id,
+        }),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          const filterTasks = allTasks.filter((task) => task.t_Id !== task_id)
+          console.log(response)
+          updateTask(filterTasks)
+        })
+        .catch((error) =>
+          console.log(
+            `Error when deleting the task id: ${task_id} => ${error}`,
+          ),
+        )
+    }
   }
 
   return (
@@ -62,7 +85,7 @@ export const TasksList = ({ tasks, updateTask }) => {
               />
             </td>
             <td>
-              <button>Delete</button>
+              <button onClick={() => handleDelete(task.t_Id)}>Delete</button>
             </td>
           </tr>
         ))}
