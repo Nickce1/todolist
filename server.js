@@ -76,9 +76,9 @@ app.get('/search/:keywords', (req, res) => {
   })
 })
 
-app.post('/changestate', (req, res) => {
+app.put('/changestate', (req, res) => {
   const QUERY_CHANGE_STATE = `UPDATE task SET t_etat = ${req.body.t_etat} WHERE t_Id = ${req.body.t_Id}`
-  connexion.query(QUERY_CHANGE_STATE, (error, result) => {
+  connexion.query(QUERY_CHANGE_STATE, (error) => {
     if (error) {
       console.log('Update change state error: ')
       console.log(error)
@@ -87,6 +87,21 @@ app.post('/changestate', (req, res) => {
         stateChange: 'Successful',
         side: 'Database',
       })
+  })
+})
+
+app.delete('/delete', (req, res) => {
+  console.log(req.body)
+  const QUERY_DELETE = `DELETE FROM task WHERE t_Id = ${req.body.id}`
+  connexion.query(QUERY_DELETE, (error) => {
+    if (error) {
+      console.log('Error from DELETE query: ')
+      console.log(error)
+    } else {
+      res.send({
+        status: 'Deleted successfully',
+      })
+    }
   })
 })
 
