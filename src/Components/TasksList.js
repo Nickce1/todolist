@@ -1,7 +1,23 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 
-export const TasksList = ({ tasks, updateTask }) => {
+export const TasksList = ({ tasks, updateTask, searchResultHandler }) => {
+  console.log(searchResultHandler)
+  const allTasksValueOnSearchUrl = (tasks) => {
+    if (tasks.length === 0) {
+      const keywords = window.location.href.split('/')[4]
+
+      fetch(`http://localhost:4000/search/${keywords}`)
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response)
+          searchResultHandler(response.data)
+        })
+    }
+  }
+
+  allTasksValueOnSearchUrl(tasks)
+
   let allTasks = [...tasks]
 
   const nameCSS = (task) => {

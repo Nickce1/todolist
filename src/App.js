@@ -47,14 +47,22 @@ function App() {
             exact
             path="/"
             component={() => (
-              <TasksList tasks={tasks} updateTask={updateTask} />
+              <TasksList
+                tasks={tasks}
+                updateTask={updateTask}
+                searchResultHandler={searchResultHandler}
+              />
             )}
           />
           <Route
             exact
             path="/search/:keyword"
             component={() => (
-              <TasksList tasks={searchResult} updateTask={updateTask} />
+              <TasksList
+                tasks={searchResult}
+                updateTask={updateTask}
+                searchResultHandler={searchResultHandler}
+              />
             )}
           />
         </Switch>
